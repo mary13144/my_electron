@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
 const createWindow = () => {
@@ -8,21 +8,21 @@ const createWindow = () => {
         frame: false,
     })
 
-    win.loadFile(path.resolve(__dirname, 'index.html')
+    win.loadURL('http://localhost:5173')
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(()=>{
     createWindow()
 
     app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
+        if(BrowserWindow.getAllWindows().length === 0){
             createWindow()
         }
     })
 })
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
+    if(process.platform !== 'darwin'){
         app.quit()
     }
 })
