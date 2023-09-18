@@ -1,0 +1,19 @@
+{
+  "name": "electron03",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon --exec electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mwx",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^26.2.1"
+  },
+  "nodemonConfig": {
+    "verbose": true,
+    "ext": "js,css,html,json"
+  }
+}
