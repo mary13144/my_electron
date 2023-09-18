@@ -43,13 +43,17 @@ contextBridge.exposeInMainWorld('api',{
         callback(value)
     })
   },
-  changeTitle: (title)=>{
-    ipcRenderer.send('changeTitle',title)
+  changeTitle: async (title)=>{
+    return await ipcRenderer.invoke('changeTitle', title)
   },
-  msg: (callback)=>{
-    ipcRenderer.on('msg',(event,value)=>{
-        callback(value)
-    })
+  // msg: (callback)=>{
+  //   ipcRenderer.on('msg',(event,value)=>{
+  //       callback(value)
+  //   })
+  // },
+  uploadFile: async (callback)=>{
+    const files = await ipcRenderer.invoke('selectFile')
+    callback(files)
   }
 })
 

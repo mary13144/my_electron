@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain,dialog} = require('electron')
 const path = require('path')
 const { createMenu } = require('./menu')
 
@@ -26,6 +26,10 @@ app.whenReady().then(res=>{
           createWindow()
       }
   })
+  ipcMain.handle('selectFile',async ()=>{
+      const { filePaths } = await dialog.showOpenDialog({})
+      return filePaths
+  })
 })
 
 app.on('window-all-closed', () => {
@@ -34,8 +38,10 @@ app.on('window-all-closed', () => {
     }
 })
 
-ipcMain.on('changeTitle',(event,title)=>{
+ipcMain.handle('changeTitle',(event,title)=>{
     console.log(title);
     BrowserWindow.fromWebContents(event.sender).setTitle(title)
-    BrowserWindow.fromWebContents(event.sender).webContents.send('msg','🐮')
+    return '标题已修改'
 })
+
+
